@@ -1,6 +1,7 @@
+import './ColorBox.css';
+
 import React, { Component } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import './ColorBox.css';
 
 type ColorBoxProps = { name: string; background: string };
 type ColorBoxState = { copied: boolean };
@@ -21,10 +22,7 @@ class ColorBox extends Component<ColorBoxProps, ColorBoxState> {
         const { name, background } = this.props;
         const { copied } = this.state;
         return (
-            <CopyToClipboard
-                text={background}
-                onCopy={this.changeCopyState}
-            >
+            <CopyToClipboard text={background} onCopy={this.changeCopyState}>
                 <div style={{ background }} className="ColorBox">
                     <div
                         style={{ background }}

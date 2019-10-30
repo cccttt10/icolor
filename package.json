@@ -6,26 +6,34 @@
     "@types/chroma-js": "^1.4.3",
     "@types/jest": "^24.0.21",
     "@types/node": "^12.12.0",
-    "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.11",
     "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-dom": "^16.9.3",
     "chroma-js": "^2.0.6",
-    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
     "typescript": "^3.6.4"
   },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
+    "eslint": "^6.6.0",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-simple-import-sort": "^4.0.0",
+    "prettier": "^1.18.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "lint": "eslint \"./src/**/*.{js,ts,tsx}\"",
+    "lint:fix": "eslint  \"./src/**/*.{js,ts,tsx}\" --fix",
+    "pretty": "prettier --config ./.prettierrc.json --write \"./src/**/*.{js,ts,tsx}\" && yarn run lint:fix",
+    "check": "prettier --config ./.prettierrc.json --check \"./src/**/*.{js,ts,tsx}\" && yarn run lint"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": ".eslintrc.js"
   },
   "browserslist": {
     "production": [

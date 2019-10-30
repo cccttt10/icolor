@@ -1,4 +1,5 @@
 import chroma from 'chroma-js';
+
 import { StarterPalette } from './starterPalettes';
 
 export class ComplexPalette {
@@ -74,20 +75,15 @@ export class ComplexColor {
     rgba: string;
 }
 
-export const generatePalette = (
-    starterPalette: StarterPalette
-): ComplexPalette => {
-    let newPalette: ComplexPalette = new ComplexPalette({
+export const generatePalette = (starterPalette: StarterPalette): ComplexPalette => {
+    const newPalette: ComplexPalette = new ComplexPalette({
         paletteName: starterPalette.paletteName,
         id: starterPalette.id,
         emoji: starterPalette.emoji
     });
     const levels: string[] = Object.keys(new Gradient());
     for (const color of starterPalette.colors) {
-        let scale: string[] = generateScale(
-            color.color,
-            10
-        ).reverse();
+        const scale: string[] = generateScale(color.color, 10).reverse();
         for (let i = 0; i < scale.length; i++) {
             newPalette.colors[levels[i]].push({
                 name: `${color.name} ${levels[i]}`,
@@ -106,12 +102,15 @@ export const generatePalette = (
 
 function generateRange(hexColor: string) {
     const end = '#fff';
-    return [ chroma(hexColor).darken(1.4).hex(), hexColor, end ];
+    return [
+        chroma(hexColor)
+            .darken(1.4)
+            .hex(),
+        hexColor,
+        end
+    ];
 }
-function generateScale(
-    hexColor: string,
-    numColors: number
-): string[] {
+function generateScale(hexColor: string, numColors: number): string[] {
     return chroma
         .scale(generateRange(hexColor))
         .mode('lab')
