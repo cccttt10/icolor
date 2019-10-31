@@ -1,7 +1,7 @@
 import './Palette.css';
 
 import React, { Component } from 'react';
-import ColorSlider from './ColorSlider';
+
 import ColorBox from './ColorBox';
 import { ComplexPalette, Gradient } from './colorHelpers';
 import NavBar from './NavBar';

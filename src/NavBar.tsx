@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import ColorSlider from './ColorSlider';
 import './NavBar.css';
+
+import React, { Component } from 'react';
+
+import ColorSlider from './ColorSlider';
 
 type ColorSliderProps = {
     level: number;
