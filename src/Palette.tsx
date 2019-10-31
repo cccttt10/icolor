@@ -1,6 +1,7 @@
 import './Palette.css';
 import 'rc-slider/assets/index.css';
 
+import CSS from 'csstype';
 import Slider from 'rc-slider';
 import React, { Component } from 'react';
 
@@ -26,15 +27,31 @@ class Palette extends Component<PaletteProps, PaletteState> {
         const colorBoxes = colors[level].map(color => (
             <ColorBox background={color.hex} name={color.name} />
         ));
+        const handleStyle: CSS.Properties = {
+            backgroundColor: 'green',
+            outline: 'none',
+            border: '2px solid green',
+            boxShadow: 'none',
+            width: '13px',
+            height: '13px',
+            marginLeft: '-7px',
+            marginTop: '-3px'
+        };
+        const trackStyle: CSS.Properties = { backgroundColor: 'transparent' };
+        const railStyle: CSS.Properties = { height: '8px'}
+        const sliderStyle = { handleStyle, trackStyle, railStyle  };
         return (
             <div className="Palette">
-                <Slider
-                    defaultValue={level}
-                    min={100}
-                    max={900}
-                    step={100}
-                    onAfterChange={this.changeLevel}
-                />
+                <div className="slider">
+                    <Slider
+                        defaultValue={level}
+                        min={100}
+                        max={900}
+                        step={100}
+                        onAfterChange={this.changeLevel}
+                        {...sliderStyle}
+                    />
+                </div>
                 <div className="Palette-colors">{colorBoxes}</div>
             </div>
         );
