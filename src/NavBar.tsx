@@ -1,8 +1,9 @@
 import './NavBar.css';
 
-import React, { Component } from 'react';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import React, { Component } from 'react';
+
 import ColorSlider from './ColorSlider';
 import { ColorFormat } from './types';
 
@@ -44,7 +45,9 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                     <Select value={format} onChange={this.handleSelectChange}>
                         <MenuItem value="hex">HEX - #FFFFFF</MenuItem>
                         <MenuItem value="rgb">RGB - RGB(255,255,255)</MenuItem>
-                        <MenuItem value="rgba">RGBA - RGBA(255,255,255,1.0)</MenuItem>
+                        <MenuItem value="rgba">
+                            RGBA - RGBA(255,255,255,1.0)
+                        </MenuItem>
                     </Select>
                 </div>
             </header>

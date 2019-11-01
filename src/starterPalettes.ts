@@ -1,14 +1,4 @@
-export class StarterPalette {
-    paletteName: string;
-    id: string;
-    emoji: string;
-    colors: StarterColor[];
-}
-
-export class StarterColor {
-    name: string;
-    color: string;
-}
+import { StarterPalette } from './types';
 
 export const starterPalettes: StarterPalette[] = [
     {

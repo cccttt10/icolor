@@ -3,10 +3,8 @@ import './Palette.css';
 import React, { Component } from 'react';
 
 import ColorBox from './ColorBox';
-import { ComplexPalette, Gradient, ComplexColor } from './colorHelpers';
 import NavBar from './NavBar';
-import { ColorFormat } from './types';
-
+import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from './types';
 type PaletteProps = { palette: ComplexPalette };
 
 type PaletteState = { level: number; format: ColorFormat };
