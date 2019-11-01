@@ -30,7 +30,11 @@ class Palette extends Component<PaletteProps, PaletteState> {
             colors,
             paletteName,
             emoji
-        }: { colors: Gradient; paletteName: string; emoji: string } = this.props.palette;
+        }: {
+            colors: Gradient;
+            paletteName: string;
+            emoji: string;
+        } = this.props.palette;
         const { level, format }: { level: number; format: ColorFormat } = this.state;
         const colorBoxes = colors[level].map((color: ComplexColor) => (
             <ColorBox background={color[format]} name={color.name} key={color.id} />
