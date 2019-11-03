@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { generatePalette } from './colorHelpers';
 import Palette from './Palette';
+import PaletteList from './PaletteList';
 import { starterPalettes } from './starterPalettes';
 import { StarterPalette } from './types';
 
@@ -17,7 +18,7 @@ class App extends Component {
                 <Route
                     exact
                     path="/"
-                    render={() => <h1>Palette list goes here</h1>}
+                    render={() => <PaletteList palettes={starterPalettes} />}
                 />
                 <Route
                     exact

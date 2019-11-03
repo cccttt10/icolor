@@ -1,5 +1,6 @@
 import './NavBar.css';
 
+import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -50,7 +51,7 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
         return (
             <header className="NavBar">
                 <div className="logo">
-                    <a href="#">iColor</a>
+                   <Link to="/">iColor</Link>
                 </div>
 
                 <ColorSlider level={level} changeLevel={changeLevel} />
