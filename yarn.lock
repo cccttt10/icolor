@@ -1540,6 +1540,14 @@
     csstype "^2.0.0"
     indefinite-observable "^1.0.1"
 
+"@types/material-ui@^0.21.7":
+  version "0.21.7"
+  resolved "https://registry.yarnpkg.com/@types/material-ui/-/material-ui-0.21.7.tgz#2a4ab77a56a16adef044ba607edde5214151a5d8"
+  integrity sha512-OxGu+Jfm3d8IVYu5w2cqosSFU+8KJYCeVjw1jLZ7DzgoE7KpSFFpbDJKWhV1FAf/HEQXzL1IpX6PmLwINlE4Xg==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-addons-linked-state-mixin" "*"
+
 "@types/node@^12.12.0":
   version "12.12.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.0.tgz#ff3201972d6dc851a9275308a17b9b5094e68057"
@@ -1554,6 +1562,13 @@
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
+
+"@types/react-addons-linked-state-mixin@*":
+  version "0.14.20"
+  resolved "https://registry.yarnpkg.com/@types/react-addons-linked-state-mixin/-/react-addons-linked-state-mixin-0.14.20.tgz#5f0cd884ace049d538982a3b254f4807b9395eb6"
+  integrity sha512-17M8ymjR/vvyaQnLNuLSQipxtUrxaIq19phbWKKz1drIXeVQx+AnqMVVVIClno/gPheJWcLVCbf+yXXbbRalIg==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-dom@^16.9.3":
   version "16.9.3"

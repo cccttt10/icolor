@@ -1,6 +1,5 @@
 import './NavBar.css';
 
-import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -8,6 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import CSS from 'csstype';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import ColorSlider from './ColorSlider';
 import { ColorFormat } from './types';
@@ -51,7 +51,7 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
         return (
             <header className="NavBar">
                 <div className="logo">
-                   <Link to="/">iColor</Link>
+                    <Link to="/">iColor</Link>
                 </div>
 
                 <ColorSlider level={level} changeLevel={changeLevel} />
