@@ -12,10 +12,29 @@ type MiniPalettePaletteProps = {
 };
 
 const MiniPalette = (props: MiniPalettePaletteProps): JSX.Element => {
-    const { classes, paletteName, id, emoji, colors } = props;
+    const {
+        classes,
+        paletteName,
+        id,
+        emoji,
+        colors
+    }: {
+        classes;
+        paletteName: string;
+        id: string;
+        emoji: string;
+        colors: StarterColor[];
+    } = props;
+    const miniColorBoxes: JSX.Element[] = colors.map((color: StarterColor) => (
+        <div
+            className={classes.miniColorBox}
+            style={{ backgroundColor: color.color }}
+            key={color.name}
+        />
+    ));
     return (
         <div className={classes.root}>
-            <div className={classes.colors}> </div>
+            <div className={classes.colors}>{miniColorBoxes}</div>
             <h5 className={classes.title}>
                 {paletteName} <span className={classes.emoji}>{emoji}</span>
             </h5>
@@ -36,7 +55,11 @@ export default withStyles({
         }
     },
     colors: {
-        backgroundColor: 'gray'
+        backgroundColor: 'white',
+        height: '150px',
+        width: '100%',
+        borderRadius: '5px',
+        overflow: 'hidden'
     },
     title: {
         display: 'flex',
@@ -51,5 +74,13 @@ export default withStyles({
     emoji: {
         marginLeft: '0.5rem',
         fontSize: '1.5rem'
+    },
+    miniColorBox: {
+        height: '25%',
+        width: '20%',
+        display: 'inline-block',
+        margin: '0 auto',
+        position: 'relative',
+        marginBottom: '-3.5px'
     }
 })(MiniPalette);
