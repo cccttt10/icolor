@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import ColorBox from './ColorBox';
 import NavBar from './NavBar';
 import PaletteFooter from './PaletteFooter';
@@ -15,7 +16,10 @@ type SingleColorPaletteState = {
     format: ColorFormat;
 };
 
-class SingleColorPalette extends Component<SingleColorPaletteProps, SingleColorPaletteState> {
+class SingleColorPalette extends Component<
+    SingleColorPaletteProps,
+    SingleColorPaletteState
+> {
     constructor(props) {
         super(props);
         this.state = { format: 'hex' };
@@ -48,7 +52,11 @@ class SingleColorPalette extends Component<SingleColorPaletteProps, SingleColorP
         ));
         return (
             <div className="SingleColorPalette Palette">
-                <NavBar changeFormat={this.changeFormat} changeLevel={null} level={null} />
+                <NavBar
+                    changeFormat={this.changeFormat}
+                    changeLevel={null}
+                    level={null}
+                />
                 <div className="Palette-colors">
                     {colorBoxes}
                     <div className="go-back ColorBox">

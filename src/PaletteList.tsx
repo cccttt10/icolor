@@ -1,9 +1,9 @@
 import { withStyles } from '@material-ui/styles';
 import React, { Component } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
 import MiniPalette from './MiniPalette';
 import { StarterPalette } from './types';
-import { RouteComponentProps } from 'react-router-dom';
 
 interface PaletteListProps extends RouteComponentProps {
     classes;
@@ -16,7 +16,10 @@ class PaletteList extends Component<PaletteListProps, {}> {
     }
 
     render() {
-        const { classes, palettes }: { classes; palettes: StarterPalette[] } = this.props;
+        const {
+            classes,
+            palettes
+        }: { classes; palettes: StarterPalette[] } = this.props;
         return (
             <div className={classes.root}>
                 <div className={classes.container}>
