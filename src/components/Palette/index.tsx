@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from '../../types';
 import { calcTextColor } from '../../util/colorHelpers';
 import ColorBox from '../ColorBox';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../NavBar';
 import PaletteFooter from '../PaletteFooter';
 import styles from './styles';
 

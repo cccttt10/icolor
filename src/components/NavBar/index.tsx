@@ -1,27 +1,26 @@
-import './NavBar.css';
-
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
-import CSS from 'csstype';
+import { WithStyles, withStyles } from '@material-ui/styles';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ColorFormat } from '../../types';
 import ColorSlider from '../ColorSlider';
+import styles from './styles';
 
-type NavBarProps = {
+interface NavBarProps extends WithStyles<typeof styles> {
     level: number | null;
     changeLevel: (level: number) => void | null;
     changeFormat: (format: ColorFormat) => void;
-};
+}
 
-type NavBarState = {
+interface NavBarState {
     format: ColorFormat;
     isSnackBarOpen: boolean;
-};
+}
 
 export class NavBar extends Component<NavBarProps, NavBarState> {
     constructor(props) {
@@ -44,19 +43,15 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
     render() {
         const { level, changeLevel } = this.props;
         const { format, isSnackBarOpen } = this.state;
-        const selectStyles: CSS.Properties = {
-            marginLeft: 'auto',
-            marginRight: '1rem'
-        };
         return (
-            <header className="NavBar">
-                <div className="logo">
+            <header className={this.props.classes.NavBar}>
+                <div className={this.props.classes.logo}>
                     <Link to="/">iColor</Link>
                 </div>
                 {changeLevel && (
                     <ColorSlider level={level} changeLevel={changeLevel} />
                 )}
-                <div className="select-container" style={selectStyles}>
+                <div className={this.props.classes.select}>
                     <Select value={format} onChange={this.handleSelectChange}>
                         <MenuItem value="hex">HEX - #FFFFFF</MenuItem>
                         <MenuItem value="rgb">RGB - RGB(255,255,255)</MenuItem>
@@ -92,4 +87,4 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
     }
 }
 
-export default NavBar;
+export default withStyles(styles)(NavBar);

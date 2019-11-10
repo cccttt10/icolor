@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { ColorFormat, ComplexColor, ComplexPalette } from '../../types';
 import { calcTextColor } from '../../util/colorHelpers';
 import ColorBox from '../ColorBox';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../NavBar';
 import PaletteFooter from '../PaletteFooter';
 import styles from './styles';
 
