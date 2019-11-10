@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from '../../types';
 import { calcTextColor } from '../../util/colorHelpers';
-import ColorBox from '../ColorBox/ColorBox';
+import ColorBox from '../ColorBox';
 import NavBar from '../NavBar/NavBar';
 import PaletteFooter from '../PaletteFooter/PaletteFooter';
 
