@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 
 import MiniPalette from './MiniPalette';
 import { StarterPalette } from './types';
+import { RouteComponentProps } from 'react-router-dom';
 
-type PaletteListProps = {
-    history;
+interface PaletteListProps extends RouteComponentProps {
     classes;
     palettes: StarterPalette[];
-};
+}
 
 class PaletteList extends Component<PaletteListProps, {}> {
     goToPalette(id: string) {
@@ -16,10 +16,7 @@ class PaletteList extends Component<PaletteListProps, {}> {
     }
 
     render() {
-        const {
-            classes,
-            palettes
-        }: { classes; palettes: StarterPalette[] } = this.props;
+        const { classes, palettes }: { classes; palettes: StarterPalette[] } = this.props;
         return (
             <div className={classes.root}>
                 <div className={classes.container}>
