@@ -57,3 +57,6 @@ export const generateShades = (
     }
     return shades.slice(1);
 };
+
+export const calcTextColor = (background: string): string =>
+    chroma(background).luminance() >= 0.6 ? 'rgba(0, 0, 0, 0.5)' : 'white';

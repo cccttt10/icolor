@@ -1,4 +1,4 @@
-import { createStyles,WithStyles, withStyles } from '@material-ui/styles';
+import { createStyles, WithStyles, withStyles } from '@material-ui/styles';
 import React from 'react';
 
 import { StarterColor } from './types';

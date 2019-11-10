@@ -3,6 +3,7 @@ import './Palette.css';
 import React, { Component } from 'react';
 
 import ColorBox from './ColorBox';
+import { calcTextColor } from './colorHelpers';
 import NavBar from './NavBar';
 import PaletteFooter from './PaletteFooter';
 import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from './types';
@@ -42,6 +43,7 @@ class Palette extends Component<PaletteProps, PaletteState> {
         const colorBoxes: JSX.Element[] = colors[level].map(
             (color: ComplexColor) => (
                 <ColorBox
+                    textColor={calcTextColor(color[format])}
                     background={color[format]}
                     name={color.name}
                     key={color.id}
