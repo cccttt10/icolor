@@ -1,4 +1,4 @@
-import { createStyles, WithStyles, withStyles } from '@material-ui/styles';
+import { WithStyles, withStyles } from '@material-ui/styles';
 import React, { Component } from 'react';
 
 import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from '../../types';
@@ -6,17 +6,7 @@ import { calcTextColor } from '../../util/colorHelpers';
 import ColorBox from '../ColorBox';
 import NavBar from '../NavBar/NavBar';
 import PaletteFooter from '../PaletteFooter';
-
-const styles = createStyles({
-    Palette: {
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column'
-    },
-    colors: {
-        height: '90%'
-    }
-});
+import styles from './styles';
 
 interface PaletteProps extends WithStyles<typeof styles> {
     palette: ComplexPalette;
