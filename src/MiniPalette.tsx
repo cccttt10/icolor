@@ -9,6 +9,7 @@ type MiniPalettePaletteProps = {
     id: string;
     emoji: string;
     colors: StarterColor[];
+    handleClick: () => void;
 };
 
 const MiniPalette = (props: MiniPalettePaletteProps): JSX.Element => {
@@ -17,13 +18,15 @@ const MiniPalette = (props: MiniPalettePaletteProps): JSX.Element => {
         paletteName,
         id,
         emoji,
-        colors
+        colors,
+        handleClick
     }: {
         classes;
         paletteName: string;
         id: string;
         emoji: string;
         colors: StarterColor[];
+        handleClick: () => void;
     } = props;
     const miniColorBoxes: JSX.Element[] = colors.map((color: StarterColor) => (
         <div
@@ -33,7 +36,7 @@ const MiniPalette = (props: MiniPalettePaletteProps): JSX.Element => {
         />
     ));
     return (
-        <div className={classes.root}>
+        <div className={classes.root} onClick={handleClick}>
             <div className={classes.colors}>{miniColorBoxes}</div>
             <h5 className={classes.title}>
                 {paletteName} <span className={classes.emoji}>{emoji}</span>
