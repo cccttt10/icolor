@@ -3,13 +3,9 @@ import React, { Component } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
 
-const calcHeight = (props: CustomProps): string => (props.moreUrl ? '25%' : '50%');
-
 const styles = createStyles({
     ColorBox: {
         width: '20%',
-        height: (((props: CustomProps): string =>
-            calcHeight(props)) as unknown) as string,
         margin: '0 auto',
         display: 'inline-block',
         position: 'relative',
@@ -115,14 +111,12 @@ const styles = createStyles({
     }
 });
 
-interface CustomProps {
+interface ColorBoxProps extends WithStyles<typeof styles> {
     name: string;
     background: string;
     moreUrl: string | null;
     textColor: string;
 }
-
-interface ColorBoxProps extends CustomProps, WithStyles<typeof styles> {}
 
 interface ColorBoxState {
     copied: boolean;
@@ -147,7 +141,10 @@ class ColorBox extends Component<ColorBoxProps, ColorBoxState> {
 
         return (
             <CopyToClipboard text={background} onCopy={this.changeCopyState}>
-                <div style={{ background }} className={this.props.classes.ColorBox}>
+                <div
+                    style={{ background, height: moreUrl ? '25%' : '50%' }}
+                    className={this.props.classes.ColorBox}
+                >
                     <div
                         style={{ background }}
                         className={`${this.props.classes.copyOverlay} ${copied &&
