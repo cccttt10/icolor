@@ -1,49 +1,9 @@
-import { withStyles } from '@material-ui/styles';
+import { createStyles,WithStyles, withStyles } from '@material-ui/styles';
 import React from 'react';
 
 import { StarterColor } from './types';
 
-type MiniPalettePaletteProps = {
-    classes;
-    paletteName: string;
-    id: string;
-    emoji: string;
-    colors: StarterColor[];
-    handleClick: () => void;
-};
-
-const MiniPalette = (props: MiniPalettePaletteProps): JSX.Element => {
-    const {
-        classes,
-        paletteName,
-        emoji,
-        colors,
-        handleClick
-    }: {
-        classes;
-        paletteName: string;
-        emoji: string;
-        colors: StarterColor[];
-        handleClick: () => void;
-    } = props;
-    const miniColorBoxes: JSX.Element[] = colors.map((color: StarterColor) => (
-        <div
-            className={classes.miniColorBox}
-            style={{ backgroundColor: color.color }}
-            key={color.name}
-        />
-    ));
-    return (
-        <div className={classes.root} onClick={handleClick}>
-            <div className={classes.colors}>{miniColorBoxes}</div>
-            <h5 className={classes.title}>
-                {paletteName} <span className={classes.emoji}>{emoji}</span>
-            </h5>
-        </div>
-    );
-};
-
-export default withStyles({
+const styles = createStyles({
     root: {
         backgroundColor: 'white',
         border: '1px solid black',
@@ -84,4 +44,43 @@ export default withStyles({
         position: 'relative',
         marginBottom: '-3.5px'
     }
-})(MiniPalette);
+});
+
+interface MiniPalettePaletteProps extends WithStyles<typeof styles> {
+    paletteName: string;
+    id: string;
+    emoji: string;
+    colors: StarterColor[];
+    handleClick: () => void;
+}
+
+const MiniPalette = (props: MiniPalettePaletteProps): JSX.Element => {
+    const {
+        paletteName,
+        emoji,
+        colors,
+        handleClick
+    }: {
+        paletteName: string;
+        emoji: string;
+        colors: StarterColor[];
+        handleClick: () => void;
+    } = props;
+    const miniColorBoxes: JSX.Element[] = colors.map((color: StarterColor) => (
+        <div
+            className={props.classes.miniColorBox}
+            style={{ backgroundColor: color.color }}
+            key={color.name}
+        />
+    ));
+    return (
+        <div className={props.classes.root} onClick={handleClick}>
+            <div className={props.classes.colors}>{miniColorBoxes}</div>
+            <h5 className={props.classes.title}>
+                {paletteName} <span className={props.classes.emoji}>{emoji}</span>
+            </h5>
+        </div>
+    );
+};
+
+export default withStyles(styles)(MiniPalette);
