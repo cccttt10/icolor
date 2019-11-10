@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { StarterPalette } from '../../types';
-import MiniPalette from '../MiniPalette/MiniPalette';
+import MiniPalette from '../MiniPalette';
 import styles from './styles';
 
 interface PaletteListProps extends RouteComponentProps, WithStyles<typeof styles> {

@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ColorFormat } from '../../types';
-import ColorSlider from '../ColorSlider/ColorSlider';
+import ColorSlider from '../ColorSlider';
 
 type NavBarProps = {
     level: number | null;
