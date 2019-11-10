@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 
-import { ComplexPalette, Gradient, StarterPalette } from './types';
+import { ComplexColor, ComplexPalette, Gradient, StarterPalette } from './types';
 
 function generateRange(hexColor: string) {
     const end = '#fff';
@@ -42,4 +42,18 @@ export const generatePalette = (starterPalette: StarterPalette): ComplexPalette 
         }
     }
     return newPalette;
+};
+
+export const generateShades = (
+    palette: ComplexPalette,
+    colorId: string
+): ComplexColor[] => {
+    let shades: ComplexColor[] = [];
+    const allColors: Gradient = palette.colors;
+    for (const level in allColors) {
+        shades = shades.concat(
+            allColors[level].filter((color: ComplexColor) => color.id === colorId)
+        );
+    }
+    return shades.slice(1);
 };

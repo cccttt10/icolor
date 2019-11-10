@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 type ColorBoxProps = {
     name: string;
     background: string;
-    id: string;
-    palettedId: string;
+    moreUrl: string | null;
 };
+
 type ColorBoxState = { copied: boolean };
+
 class ColorBox extends Component<ColorBoxProps, ColorBoxState> {
     constructor(props) {
         super(props);
@@ -25,7 +26,7 @@ class ColorBox extends Component<ColorBoxProps, ColorBoxState> {
     }
 
     render() {
-        const { name, background, id, palettedId } = this.props;
+        const { name, background, moreUrl } = this.props;
         const { copied } = this.state;
         return (
             <CopyToClipboard text={background} onCopy={this.changeCopyState}>
@@ -46,12 +47,11 @@ class ColorBox extends Component<ColorBoxProps, ColorBoxState> {
                         </div>
                         <button className="copy-button">Copy</button>
                     </div>
-                    <Link
-                        to={`/palette/${palettedId}/${id}`}
-                        onClick={e => e.stopPropagation()}
-                    >
-                        <span className="see-more">MORE</span>
-                    </Link>
+                    {moreUrl && (
+                        <Link to={moreUrl} onClick={e => e.stopPropagation()}>
+                            <span className="see-more">MORE</span>
+                        </Link>
+                    )}
                 </div>
             </CopyToClipboard>
         );

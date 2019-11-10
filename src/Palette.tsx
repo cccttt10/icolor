@@ -38,15 +38,16 @@ class Palette extends Component<PaletteProps, PaletteState> {
             id: string;
         } = this.props.palette;
         const { level, format }: { level: number; format: ColorFormat } = this.state;
-        const colorBoxes = colors[level].map((color: ComplexColor) => (
-            <ColorBox
-                background={color[format]}
-                name={color.name}
-                key={color.id}
-                id={color.id}
-                palettedId={id}
-            />
-        ));
+        const colorBoxes: JSX.Element[] = colors[level].map(
+            (color: ComplexColor) => (
+                <ColorBox
+                    background={color[format]}
+                    name={color.name}
+                    key={color.id}
+                    moreUrl={`/palette/${id}/${color.id}`}
+                />
+            )
+        );
         return (
             <div className="Palette">
                 {/* <ColorSlider level={level} changeLevel={this.changeLevel} /> */}

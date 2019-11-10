@@ -16,14 +16,12 @@ const MiniPalette = (props: MiniPalettePaletteProps): JSX.Element => {
     const {
         classes,
         paletteName,
-        id,
         emoji,
         colors,
         handleClick
     }: {
         classes;
         paletteName: string;
-        id: string;
         emoji: string;
         colors: StarterColor[];
         handleClick: () => void;

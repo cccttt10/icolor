@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { generatePalette } from './colorHelpers';
+import { generatePalette, generateShades } from './colorHelpers';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
 import SingleColorPalette from './SingleColorPalette';
 import { starterPalettes } from './starterPalettes';
-import { StarterPalette } from './types';
+import { ComplexColor, ComplexPalette, StarterPalette } from './types';
 
 class App extends Component {
     findPalette(id: string): StarterPalette {
@@ -37,12 +37,25 @@ class App extends Component {
                 <Route
                     exact
                     path="/palette/:paletteId/:colorId"
-                    render={() => <SingleColorPalette />}
+                    render={routeProps => {
+                        const palette: ComplexPalette = generatePalette(
+                            this.findPalette(routeProps.match.params.paletteId)
+                        );
+                        const colorId: string = routeProps.match.params.colorId;
+                        const shades: ComplexColor[] = generateShades(
+                            palette,
+                            colorId
+                        );
+                        return (
+                            <SingleColorPalette
+                                colorId={colorId}
+                                palette={palette}
+                                shades={shades}
+                            />
+                        );
+                    }}
                 />
             </Switch>
-            // <div>
-            //     <Palette palette={generatePalette(starterPalettes[4])} />
-            // </div>
         );
     }
 }
