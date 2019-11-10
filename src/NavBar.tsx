@@ -13,8 +13,8 @@ import ColorSlider from './ColorSlider';
 import { ColorFormat } from './types';
 
 type NavBarProps = {
-    level: number;
-    changeLevel: (level: number) => void;
+    level: number | null;
+    changeLevel: (level: number) => void | null;
     changeFormat: (format: ColorFormat) => void;
 };
 
@@ -53,8 +53,9 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                 <div className="logo">
                     <Link to="/">iColor</Link>
                 </div>
-
-                <ColorSlider level={level} changeLevel={changeLevel} />
+                {changeLevel && (
+                    <ColorSlider level={level} changeLevel={changeLevel} />
+                )}
                 <div className="select-container" style={selectStyles}>
                     <Select value={format} onChange={this.handleSelectChange}>
                         <MenuItem value="hex">HEX - #FFFFFF</MenuItem>

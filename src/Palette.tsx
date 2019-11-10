@@ -4,9 +4,10 @@ import React, { Component } from 'react';
 
 import ColorBox from './ColorBox';
 import NavBar from './NavBar';
+import PaletteFooter from './PaletteFooter';
 import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from './types';
-type PaletteProps = { palette: ComplexPalette };
 
+type PaletteProps = { palette: ComplexPalette };
 type PaletteState = { level: number; format: ColorFormat };
 
 class Palette extends Component<PaletteProps, PaletteState> {
@@ -50,17 +51,13 @@ class Palette extends Component<PaletteProps, PaletteState> {
         );
         return (
             <div className="Palette">
-                {/* <ColorSlider level={level} changeLevel={this.changeLevel} /> */}
                 <NavBar
                     level={level}
                     changeLevel={this.changeLevel}
                     changeFormat={this.changeFormat}
                 />
                 <div className="Palette-colors">{colorBoxes}</div>
-                <footer className="Palette-footer">
-                    {paletteName}
-                    <span className="emoji">{emoji}</span>
-                </footer>
+                <PaletteFooter paletteName={paletteName} emoji={emoji} />
             </div>
         );
     }
