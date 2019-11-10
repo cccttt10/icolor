@@ -1,20 +1,7 @@
-import { createStyles, WithStyles, withStyles } from '@material-ui/styles';
+import { WithStyles, withStyles } from '@material-ui/styles';
 import React from 'react';
 
-const styles = createStyles({
-    footer: {
-        backgroundColor: 'white',
-        height: '5vh',
-        display: 'flex',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        fontWeight: 'bold'
-    },
-    emoji: {
-        fontSize: '1.5rem',
-        margin: '0 1rem'
-    }
-});
+import styles from './styles';
 
 interface PaletteFooterProps extends WithStyles<typeof styles> {
     paletteName: string;

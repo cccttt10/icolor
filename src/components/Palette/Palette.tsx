@@ -5,7 +5,7 @@ import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from '../../types
 import { calcTextColor } from '../../util/colorHelpers';
 import ColorBox from '../ColorBox';
 import NavBar from '../NavBar/NavBar';
-import PaletteFooter from '../PaletteFooter/PaletteFooter';
+import PaletteFooter from '../PaletteFooter';
 
 const styles = createStyles({
     Palette: {
