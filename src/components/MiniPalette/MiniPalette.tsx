@@ -1,7 +1,7 @@
 import { createStyles, WithStyles, withStyles } from '@material-ui/styles';
 import React from 'react';
 
-import { StarterColor } from './types';
+import { StarterColor } from '../../types';
 
 const styles = createStyles({
     root: {

@@ -1,4 +1,4 @@
-import { StarterPalette } from './types';
+import { StarterPalette } from '../types';
 
 export const starterPalettes: StarterPalette[] = [
     {

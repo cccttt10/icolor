@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { generatePalette, generateShades } from './colorHelpers';
-import Palette from './Palette';
-import PaletteList from './PaletteList';
-import SingleColorPalette from './SingleColorPalette';
-import { starterPalettes } from './starterPalettes';
+import Palette from './components/Palette/Palette';
+import PaletteList from './components/PaletteList/PaletteList';
+import SingleColorPalette from './components/SingleColorPalette/SingleColorPalette';
 import { ComplexColor, ComplexPalette, StarterPalette } from './types';
+import { generatePalette, generateShades } from './util/colorHelpers';
+import { starterPalettes } from './util/starterPalettes';
 
 class App extends Component {
     findPalette(id: string): StarterPalette {

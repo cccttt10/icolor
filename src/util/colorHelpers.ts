@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 
-import { ComplexColor, ComplexPalette, Gradient, StarterPalette } from './types';
+import { ComplexColor, ComplexPalette, Gradient, StarterPalette } from '../types';
 
 function generateRange(hexColor: string) {
     const end = '#fff';
@@ -59,4 +59,4 @@ export const generateShades = (
 };
 
 export const calcTextColor = (background: string): string =>
-    chroma(background).luminance() >= 0.6 ? 'rgba(0, 0, 0, 0.5)' : 'white';
+    chroma(background).luminance() >= 0.5 ? 'rgba(0, 0, 0, 0.5)' : 'white';

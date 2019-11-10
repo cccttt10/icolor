@@ -1,15 +1,31 @@
-import './Palette.css';
-
+import { createStyles, WithStyles, withStyles } from '@material-ui/styles';
 import React, { Component } from 'react';
 
-import ColorBox from './ColorBox';
-import { calcTextColor } from './colorHelpers';
-import NavBar from './NavBar';
-import PaletteFooter from './PaletteFooter';
-import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from './types';
+import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from '../../types';
+import { calcTextColor } from '../../util/colorHelpers';
+import ColorBox from '../ColorBox/ColorBox';
+import NavBar from '../NavBar/NavBar';
+import PaletteFooter from '../PaletteFooter/PaletteFooter';
 
-type PaletteProps = { palette: ComplexPalette };
-type PaletteState = { level: number; format: ColorFormat };
+const styles = createStyles({
+    Palette: {
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    colors: {
+        height: '90%'
+    }
+});
+
+interface PaletteProps extends WithStyles<typeof styles> {
+    palette: ComplexPalette;
+}
+
+interface PaletteState {
+    level: number;
+    format: ColorFormat;
+}
 
 class Palette extends Component<PaletteProps, PaletteState> {
     constructor(props) {
@@ -52,17 +68,17 @@ class Palette extends Component<PaletteProps, PaletteState> {
             )
         );
         return (
-            <div className="Palette">
+            <div className={this.props.classes.Palette}>
                 <NavBar
                     level={level}
                     changeLevel={this.changeLevel}
                     changeFormat={this.changeFormat}
                 />
-                <div className="Palette-colors">{colorBoxes}</div>
+                <div className={this.props.classes.colors}>{colorBoxes}</div>
                 <PaletteFooter paletteName={paletteName} emoji={emoji} />
             </div>
         );
     }
 }
 
-export default Palette;
+export default withStyles(styles)(Palette);

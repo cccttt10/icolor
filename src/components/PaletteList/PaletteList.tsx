@@ -2,8 +2,8 @@ import { createStyles, WithStyles, withStyles } from '@material-ui/styles';
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import MiniPalette from './MiniPalette';
-import { StarterPalette } from './types';
+import { StarterPalette } from '../../types';
+import MiniPalette from '../MiniPalette/MiniPalette';
 
 const styles = createStyles({
     root: {
