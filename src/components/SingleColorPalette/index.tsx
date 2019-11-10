@@ -7,7 +7,6 @@ import { calcTextColor } from '../../util/colorHelpers';
 import ColorBox from '../ColorBox';
 import NavBar from '../NavBar/NavBar';
 import PaletteFooter from '../PaletteFooter/PaletteFooter';
-
 import styles from './styles';
 
 interface SingleColorPaletteProps extends WithStyles<typeof styles> {
@@ -20,7 +19,10 @@ interface SingleColorPaletteState {
     format: ColorFormat;
 }
 
-class SingleColorPalette extends Component<SingleColorPaletteProps, SingleColorPaletteState> {
+class SingleColorPalette extends Component<
+    SingleColorPaletteProps,
+    SingleColorPaletteState
+> {
     constructor(props) {
         super(props);
         this.state = { format: 'hex' };
@@ -54,7 +56,11 @@ class SingleColorPalette extends Component<SingleColorPaletteProps, SingleColorP
         ));
         return (
             <div className={this.props.classes.Palette}>
-                <NavBar changeFormat={this.changeFormat} changeLevel={null} level={null} />
+                <NavBar
+                    changeFormat={this.changeFormat}
+                    changeLevel={null}
+                    level={null}
+                />
                 <div className={this.props.classes.colors}>
                     {colorBoxes}
                     <div className={this.props.classes.goBack}>
