@@ -42,7 +42,8 @@ const styles = createStyles({
         display: 'inline-block',
         margin: '0 auto',
         position: 'relative',
-        marginBottom: '-3.5px'
+        // marginBottom: '-3.5px',
+        marginBottom: '-7.5px'
     }
 });
 

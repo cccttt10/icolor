@@ -12,7 +12,7 @@ const styles = createStyles({
         padding: '0 13px',
         fontSize: '22px',
         backgroundColor: '#eceff1',
-        fontFamily: 'Roboto',
+        fontFamily: 'Poppins',
         height: '100%',
         display: 'flex',
         alignItems: 'center',
