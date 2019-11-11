@@ -4,25 +4,28 @@ import Select from '@material-ui/core/Select';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import { WithStyles, withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
+import React, { Component, ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ColorFormat } from '../../types';
 import ColorSlider from '../ColorSlider';
 import styles from './styles';
 
-interface NavBarProps extends WithStyles<typeof styles> {
+type NavBarProps = {
     level: number | null;
     changeLevel: (level: number) => void | null;
     changeFormat: (format: ColorFormat) => void;
-}
+};
 
-interface NavBarState {
+type NavBarState = {
     format: ColorFormat;
     isSnackBarOpen: boolean;
-}
+};
 
-export class NavBar extends Component<NavBarProps, NavBarState> {
+export class NavBar extends Component<
+    NavBarProps & WithStyles<typeof styles>,
+    NavBarState
+> {
     constructor(props) {
         super(props);
         this.state = { format: 'hex', isSnackBarOpen: false };
@@ -30,17 +33,17 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
         this.closeSnackBar = this.closeSnackBar.bind(this);
     }
 
-    handleSelectChange(e) {
-        const format = e.target.value;
+    handleSelectChange(e): void {
+        const format: ColorFormat = e.target.value;
         this.setState({ format, isSnackBarOpen: true });
         this.props.changeFormat(format);
     }
 
-    closeSnackBar() {
+    closeSnackBar(): void {
         this.setState({ isSnackBarOpen: false });
     }
 
-    render() {
+    render(): JSX.Element {
         const { level, changeLevel } = this.props;
         const { format, isSnackBarOpen } = this.state;
         return (
@@ -91,4 +94,4 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
     }
 }
 
-export default withStyles(styles)(NavBar);
+export default withStyles(styles)(NavBar) as ComponentType<NavBarProps>;
