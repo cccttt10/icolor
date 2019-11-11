@@ -1,21 +1,24 @@
 import { WithStyles, withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
+import React, { Component, ComponentType } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { StarterPalette } from '../../types';
 import MiniPalette from '../MiniPalette';
 import styles from './styles';
 
-interface PaletteListProps extends RouteComponentProps, WithStyles<typeof styles> {
+type PaletteListProps = {
     palettes: StarterPalette[];
-}
+} & RouteComponentProps;
 
-class PaletteList extends Component<PaletteListProps, {}> {
-    goToPalette(id: string) {
+class PaletteList extends Component<
+    PaletteListProps & WithStyles<typeof styles>,
+    {}
+> {
+    goToPalette(id: string): void {
         this.props.history.push(`/palette/${id}`);
     }
 
-    render() {
+    render(): JSX.Element {
         const { palettes }: { palettes: StarterPalette[] } = this.props;
         return (
             <div className={this.props.classes.root}>
@@ -24,13 +27,15 @@ class PaletteList extends Component<PaletteListProps, {}> {
                         <h1>iColor</h1>
                     </nav>
                     <div className={this.props.classes.palettes}>
-                        {palettes.map((palette: StarterPalette) => (
-                            <MiniPalette
-                                {...palette}
-                                key={palette.id}
-                                handleClick={() => this.goToPalette(palette.id)}
-                            />
-                        ))}
+                        {palettes.map(
+                            (palette: StarterPalette): JSX.Element => (
+                                <MiniPalette
+                                    {...palette}
+                                    key={palette.id}
+                                    handleClick={() => this.goToPalette(palette.id)}
+                                />
+                            )
+                        )}
                     </div>
                 </div>
             </div>
@@ -38,4 +43,4 @@ class PaletteList extends Component<PaletteListProps, {}> {
     }
 }
 
-export default withStyles(styles)(PaletteList);
+export default withStyles(styles)(PaletteList) as ComponentType<PaletteListProps>;
