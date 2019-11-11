@@ -10,6 +10,14 @@ module.exports = {
         'react',
         '@typescript-eslint'
     ],
+    'overrides': [
+        {
+            'files': 'src/util/starterPalettes.ts',
+            'rules': {
+                'max-lines': 'off'
+            }
+        }
+    ],
     'env': {
         'node': true,
         'es6': true,
@@ -25,6 +33,7 @@ module.exports = {
         'sourceType': 'module'
     },
     'rules': {
+        'max-lines': [ 'error', 200 ],
         'no-var': 'error',
         'require-await': 'error',
         'no-trailing-spaces': 'error',
