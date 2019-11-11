@@ -1,3 +1,4 @@
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
@@ -15,49 +16,63 @@ class App extends Component {
     }
 
     render() {
+        const theme = createMuiTheme({
+            typography: {
+                fontFamily: ['"Poppins"', '"Helvetica Neue"', 'sans-serif'].join(',')
+            }
+        });
         return (
-            <Switch>
-                <Route exact path="/palette/new" render={() => <NewPaletteForm />} />
-                <Route
-                    exact
-                    path="/"
-                    render={routeProps => (
-                        <PaletteList palettes={starterPalettes} {...routeProps} />
-                    )}
-                />
-                <Route
-                    exact
-                    path="/palette/:id"
-                    render={routeProps => (
-                        <Palette
-                            palette={generatePalette(
-                                this.findPalette(routeProps.match.params.id)
-                            )}
-                        />
-                    )}
-                />
-                <Route
-                    exact
-                    path="/palette/:paletteId/:colorId"
-                    render={routeProps => {
-                        const palette: ComplexPalette = generatePalette(
-                            this.findPalette(routeProps.match.params.paletteId)
-                        );
-                        const colorId: string = routeProps.match.params.colorId;
-                        const shades: ComplexColor[] = generateShades(
-                            palette,
-                            colorId
-                        );
-                        return (
-                            <SingleColorPalette
-                                colorId={colorId}
-                                palette={palette}
-                                shades={shades}
+            <MuiThemeProvider theme={theme}>
+                <Switch>
+                    <Route
+                        exact
+                        path="/palette/new"
+                        render={() => <NewPaletteForm />}
+                    />
+                    <Route
+                        exact
+                        path="/"
+                        render={routeProps => (
+                            <PaletteList
+                                palettes={starterPalettes}
+                                {...routeProps}
                             />
-                        );
-                    }}
-                />
-            </Switch>
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/palette/:id"
+                        render={routeProps => (
+                            <Palette
+                                palette={generatePalette(
+                                    this.findPalette(routeProps.match.params.id)
+                                )}
+                            />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/palette/:paletteId/:colorId"
+                        render={routeProps => {
+                            const palette: ComplexPalette = generatePalette(
+                                this.findPalette(routeProps.match.params.paletteId)
+                            );
+                            const colorId: string = routeProps.match.params.colorId;
+                            const shades: ComplexColor[] = generateShades(
+                                palette,
+                                colorId
+                            );
+                            return (
+                                <SingleColorPalette
+                                    colorId={colorId}
+                                    palette={palette}
+                                    shades={shades}
+                                />
+                            );
+                        }}
+                    />
+                </Switch>
+            </MuiThemeProvider>
         );
     }
 }

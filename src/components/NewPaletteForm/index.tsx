@@ -1,5 +1,6 @@
 import {
     AppBar,
+    Button,
     CssBaseline,
     Divider,
     Drawer,
@@ -13,6 +14,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MenuIcon from '@material-ui/icons/Menu';
 import classNames from 'classnames';
 import React, { Component, ComponentType } from 'react';
+import { ChromePicker } from 'react-color';
 
 import styles from './styles';
 
@@ -84,6 +86,19 @@ class NewPaletteForm extends Component<
                         </IconButton>
                     </div>
                     <Divider />
+                    <Typography variant="h4">Design Your Palette</Typography>
+                    <div>
+                        <Button variant="contained" color="secondary">
+                            Clear Palette
+                        </Button>
+                        <Button variant="contained" color="primary">
+                            Random Color
+                        </Button>
+                    </div>
+                    <ChromePicker />
+                    <Button variant="contained" color="primary">
+                        Add Color
+                    </Button>
                 </Drawer>
                 <main
                     className={classNames(classes.content, {
