@@ -1,35 +1,38 @@
 import { WithStyles, withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
+import React, { Component, ComponentType } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
 
 import styles from './styles';
 
-interface ColorBoxProps extends WithStyles<typeof styles> {
+type ColorBoxProps = {
     name: string;
     background: string;
     moreUrl: string | null;
     textColor: string;
-}
+};
 
-interface ColorBoxState {
+type ColorBoxState = {
     copied: boolean;
-}
+};
 
-class ColorBox extends Component<ColorBoxProps, ColorBoxState> {
+class ColorBox extends Component<
+    ColorBoxProps & WithStyles<typeof styles>,
+    ColorBoxState
+> {
     constructor(props) {
         super(props);
         this.state = { copied: false };
         this.changeCopyState = this.changeCopyState.bind(this);
     }
 
-    changeCopyState() {
+    changeCopyState(): void {
         this.setState({ copied: true }, () => {
             setTimeout(() => this.setState({ copied: false }), 1500);
         });
     }
 
-    render() {
+    render(): JSX.Element {
         const { name, background, moreUrl, textColor } = this.props;
         const { copied } = this.state;
 
@@ -80,4 +83,4 @@ class ColorBox extends Component<ColorBoxProps, ColorBoxState> {
     }
 }
 
-export default withStyles(styles)(ColorBox);
+export default withStyles(styles)(ColorBox) as ComponentType<ColorBoxProps>;
