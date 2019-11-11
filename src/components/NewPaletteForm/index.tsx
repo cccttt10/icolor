@@ -16,6 +16,7 @@ import classNames from 'classnames';
 import React, { Component, ComponentType } from 'react';
 import { ChromePicker, ColorResult } from 'react-color';
 
+import DraggableColorBox from '../DraggableColorBox/';
 import styles from './styles';
 
 type NewPaletteFormState = {
@@ -131,11 +132,10 @@ class NewPaletteForm extends Component<
                     })}
                 >
                     <div className={classes.drawerHeader} />
-                    <ul>
-                        {this.state.colors.map(color => (
-                            <li style={{ backgroundColor: color }}>{color}</li>
-                        ))}
-                    </ul>
+
+                    {this.state.colors.map(color => (
+                        <DraggableColorBox color={color} />
+                    ))}
                 </main>
             </div>
         );

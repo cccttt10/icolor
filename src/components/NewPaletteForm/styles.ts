@@ -43,6 +43,7 @@ const styles = (theme: Theme) =>
             justifyContent: 'flex-end'
         },
         content: {
+            height: 'calc(100vh - 64px)',
             flexGrow: 1,
             padding: theme.spacing.unit * 3,
             transition: theme.transitions.create('margin', {
