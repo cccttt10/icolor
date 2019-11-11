@@ -48,16 +48,16 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                 <div className={this.props.classes.logo}>
                     <Link to="/">iColor</Link>
                 </div>
-                {changeLevel && (
-                    <ColorSlider level={level} changeLevel={changeLevel} />
-                )}
+                {changeLevel && <ColorSlider level={level} changeLevel={changeLevel} />}
                 <div className={this.props.classes.select}>
-                    <Select value={format} onChange={this.handleSelectChange}>
+                    <Select
+                        value={format}
+                        onChange={this.handleSelectChange}
+                        style={{ fontFamily: `"Poppins", sans-serif` }}
+                    >
                         <MenuItem value="hex">HEX - #FFFFFF</MenuItem>
                         <MenuItem value="rgb">RGB - RGB(255,255,255)</MenuItem>
-                        <MenuItem value="rgba">
-                            RGBA - RGBA(255,255,255,1.0)
-                        </MenuItem>
+                        <MenuItem value="rgba">RGBA - RGBA(255,255,255,1.0)</MenuItem>
                     </Select>
                 </div>
                 <Snackbar
@@ -65,9 +65,7 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                     open={isSnackBarOpen}
                     autoHideDuration={3000}
                     message={
-                        <span id="message-id">
-                            Format Changed To {format.toUpperCase()}
-                        </span>
+                        <span id="message-id">Format Changed To {format.toUpperCase()}</span>
                     }
                     ContentProps={{ 'aria-describedby': 'message-id' }}
                     onClose={this.closeSnackBar}

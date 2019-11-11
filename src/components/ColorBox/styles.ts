@@ -44,7 +44,8 @@ const styles = createStyles({
         border: 'none',
         textDecoration: 'none',
         cursor: 'pointer',
-        opacity: 0
+        opacity: 0,
+        fontFamily: '"Poppins", sans-serif'
     },
     boxContent: {
         position: 'absolute',
@@ -72,6 +73,7 @@ const styles = createStyles({
         position: 'absolute'
     },
     copyMessage: {
+        fontFamily: '"Poppins", sans-serif',
         position: 'fixed',
         left: 0,
         right: 0,
