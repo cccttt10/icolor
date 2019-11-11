@@ -1,5 +1,5 @@
 import { WithStyles, withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
+import React, { Component, ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ColorFormat, ComplexColor, ComplexPalette } from '../../types';
@@ -9,18 +9,18 @@ import NavBar from '../NavBar';
 import PaletteFooter from '../PaletteFooter';
 import styles from './styles';
 
-interface SingleColorPaletteProps extends WithStyles<typeof styles> {
+type SingleColorPaletteProps = {
     palette: ComplexPalette;
     colorId: string;
     shades: ComplexColor[];
-}
+};
 
-interface SingleColorPaletteState {
+type SingleColorPaletteState = {
     format: ColorFormat;
-}
+};
 
 class SingleColorPalette extends Component<
-    SingleColorPaletteProps,
+    SingleColorPaletteProps & WithStyles<typeof styles>,
     SingleColorPaletteState
 > {
     constructor(props) {
@@ -29,11 +29,11 @@ class SingleColorPalette extends Component<
         this.changeFormat = this.changeFormat.bind(this);
     }
 
-    changeFormat(format: ColorFormat) {
+    changeFormat(format: ColorFormat): void {
         this.setState({ format });
     }
 
-    render() {
+    render(): JSX.Element {
         const {
             palette,
             shades
@@ -73,4 +73,6 @@ class SingleColorPalette extends Component<
     }
 }
 
-export default withStyles(styles)(SingleColorPalette);
+export default withStyles(styles)(SingleColorPalette) as ComponentType<
+    SingleColorPaletteProps
+>;
