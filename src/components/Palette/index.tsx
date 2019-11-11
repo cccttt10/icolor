@@ -1,5 +1,5 @@
 import { WithStyles, withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
+import React, { Component, ComponentType } from 'react';
 
 import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from '../../types';
 import { calcTextColor } from '../../util/colorHelpers';
@@ -8,16 +8,19 @@ import NavBar from '../NavBar';
 import PaletteFooter from '../PaletteFooter';
 import styles from './styles';
 
-interface PaletteProps extends WithStyles<typeof styles> {
+type PaletteProps = {
     palette: ComplexPalette;
-}
+};
 
-interface PaletteState {
+type PaletteState = {
     level: number;
     format: ColorFormat;
-}
+};
 
-class Palette extends Component<PaletteProps, PaletteState> {
+class Palette extends Component<
+    PaletteProps & WithStyles<typeof styles>,
+    PaletteState
+> {
     constructor(props) {
         super(props);
         this.state = { level: 500, format: 'hex' };
@@ -25,15 +28,15 @@ class Palette extends Component<PaletteProps, PaletteState> {
         this.changeFormat = this.changeFormat.bind(this);
     }
 
-    changeLevel(level: number) {
+    changeLevel(level: number): void {
         this.setState({ level });
     }
 
-    changeFormat(format: ColorFormat) {
+    changeFormat(format: ColorFormat): void {
         this.setState({ format });
     }
 
-    render() {
+    render(): JSX.Element {
         const {
             colors,
             paletteName,
@@ -71,4 +74,4 @@ class Palette extends Component<PaletteProps, PaletteState> {
     }
 }
 
-export default withStyles(styles)(Palette);
+export default withStyles(styles)(Palette) as ComponentType<PaletteProps>;
