@@ -1,5 +1,6 @@
 import { WithStyles, withStyles } from '@material-ui/styles';
 import React, { Component, ComponentType } from 'react';
+import { Link } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { StarterPalette } from '../../types';
@@ -25,6 +26,7 @@ class PaletteList extends Component<
                 <div className={this.props.classes.container}>
                     <nav className={this.props.classes.nav}>
                         <h1>iColor</h1>
+                        <Link to="/palette/new">Create Palette</Link>
                     </nav>
                     <div className={this.props.classes.palettes}>
                         {palettes.map(
