@@ -1,7 +1,8 @@
 {
   "name": "icolor",
+  "homepage": "https://chuntonggao.github.io/icolor",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@material-ui/core": "3.9.3",
     "@material-ui/icons": "3.0.2",
@@ -31,11 +32,14 @@
     "eslint": "^6.6.0",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-simple-import-sort": "^4.0.0",
+    "gh-pages": "^2.1.1",
     "prettier": "^1.18.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "yarn run check && react-scripts build",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "lint": "eslint \"./src/**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint  \"./src/**/*.{js,ts,tsx}\" --fix",
     "pretty": "prettier --config ./.prettierrc.json --write \"./src/**/*.{js,ts,tsx}\" && yarn run lint:fix",
