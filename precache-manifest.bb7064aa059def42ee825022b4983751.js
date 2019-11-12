@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0765900abd16ac728f4445e7db832336",
+    "revision": "e71574c86123a5c3757af5942664d73d",
     "url": "/icolor/index.html"
   },
   {
