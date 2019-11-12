@@ -6,7 +6,7 @@ import './index.css';
 import App from './App.tsx';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter basename="/icolor">
         <App />
     </BrowserRouter>,
     document.getElementById('root')
