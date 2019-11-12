@@ -2,6 +2,7 @@
   "name": "icolor",
   "homepage": "https://chuntonggao.github.io/icolor",
   "version": "0.1.0",
+  "license": "MIT",
   "private": false,
   "dependencies": {
     "@material-ui/core": "3.9.3",
