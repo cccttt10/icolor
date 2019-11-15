@@ -36,7 +36,7 @@ class NewPaletteForm extends Component<
     {} & WithStyles<typeof styles>,
     NewPaletteFormState
 > {
-    constructor(props) {
+    constructor(props: {} & WithStyles<typeof styles>) {
         super(props);
         this.state = {
             open: true,

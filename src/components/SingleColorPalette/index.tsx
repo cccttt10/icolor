@@ -23,9 +23,9 @@ class SingleColorPalette extends Component<
     SingleColorPaletteProps & WithStyles<typeof styles>,
     SingleColorPaletteState
 > {
-    constructor(props) {
+    constructor(props: SingleColorPaletteProps & WithStyles<typeof styles>) {
         super(props);
-        this.state = { format: 'hex' };
+        this.state = { format: ColorFormat.HEX };
         this.changeFormat = this.changeFormat.bind(this);
     }
 
@@ -58,8 +58,8 @@ class SingleColorPalette extends Component<
             <div className={this.props.classes.Palette}>
                 <NavBar
                     changeFormat={this.changeFormat}
-                    changeLevel={null}
-                    level={null}
+                    changeIntensity={null}
+                    intensity={null}
                 />
                 <div className={this.props.classes.colors}>
                     {colorBoxes}

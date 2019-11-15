@@ -29,7 +29,7 @@ const MiniPalette = (
     const miniColorBoxes: JSX.Element[] = colors.map((color: StarterColor) => (
         <div
             className={props.classes.miniColorBox}
-            style={{ backgroundColor: color.color }}
+            style={{ backgroundColor: color.hex }}
             key={color.name}
         />
     ));

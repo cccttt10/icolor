@@ -2,6 +2,7 @@ import { createStyles, Theme } from '@material-ui/core';
 
 const drawerWidth = 400;
 
+/* eslint-disable-next-line @typescript-eslint/explicit-function-return-type */
 const styles = (theme: Theme) =>
     createStyles({
         root: {

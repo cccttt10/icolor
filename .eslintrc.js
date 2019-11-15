@@ -23,6 +23,7 @@ module.exports = {
     'plugins': ['simple-import-sort', 'react', '@typescript-eslint'],
     'rules': {
         '@typescript-eslint/explicit-function-return-type': 'warn',
+        '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/no-use-before-define': 'warn',
         'camelcase': 'error',
         'eqeqeq': 'error',
@@ -30,7 +31,7 @@ module.exports = {
         'no-console': 'warn',
         'no-trailing-spaces': 'error',
         'no-unused-vars': ['error', {
-            'argsIgnorePattern': '^(resource|props)$',
+            'argsIgnorePattern': '^(props)$',
             'varsIgnorePattern': 'React'
         }],
         'no-var': 'error',

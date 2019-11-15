@@ -7,13 +7,13 @@ import { WithStyles, withStyles } from '@material-ui/styles';
 import React, { Component, ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ColorFormat } from '../../types';
+import { ColorFormat, ColorIntensity } from '../../types';
 import ColorSlider from '../ColorSlider';
 import styles from './styles';
 
 type NavBarProps = {
-    level: number | null;
-    changeLevel: (level: number) => void | null;
+    intensity: ColorIntensity | null;
+    changeIntensity: ((intensity: ColorIntensity) => void) | null;
     changeFormat: (format: ColorFormat) => void;
 };
 
@@ -26,15 +26,16 @@ export class NavBar extends Component<
     NavBarProps & WithStyles<typeof styles>,
     NavBarState
 > {
-    constructor(props) {
+    constructor(props: NavBarProps & WithStyles<typeof styles>) {
         super(props);
-        this.state = { format: 'hex', isSnackBarOpen: false };
+        this.state = { format: ColorFormat.HEX, isSnackBarOpen: false };
         this.handleSelectChange = this.handleSelectChange.bind(this);
         this.closeSnackBar = this.closeSnackBar.bind(this);
     }
 
-    handleSelectChange(e): void {
-        const format: ColorFormat = e.target.value;
+    handleSelectChange(e: React.FormEvent<HTMLSelectElement>): void {
+        const target: HTMLSelectElement = e.target as HTMLSelectElement;
+        const format: ColorFormat = target.value as ColorFormat;
         this.setState({ format, isSnackBarOpen: true });
         this.props.changeFormat(format);
     }
@@ -44,15 +45,18 @@ export class NavBar extends Component<
     }
 
     render(): JSX.Element {
-        const { level, changeLevel } = this.props;
+        const { intensity, changeIntensity } = this.props;
         const { format, isSnackBarOpen } = this.state;
         return (
             <header className={this.props.classes.NavBar}>
                 <div className={this.props.classes.logo}>
                     <Link to="/">iColor</Link>
                 </div>
-                {changeLevel && (
-                    <ColorSlider level={level} changeLevel={changeLevel} />
+                {changeIntensity && intensity && (
+                    <ColorSlider
+                        intensity={intensity}
+                        changeIntensity={changeIntensity}
+                    />
                 )}
                 <div className={this.props.classes.select}>
                     <Select

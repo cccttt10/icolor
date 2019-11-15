@@ -1,7 +1,13 @@
 import { WithStyles, withStyles } from '@material-ui/styles';
 import React, { Component, ComponentType } from 'react';
 
-import { ColorFormat, ComplexColor, ComplexPalette, Gradient } from '../../types';
+import {
+    ColorFormat,
+    ColorIntensity,
+    ComplexColor,
+    ComplexPalette,
+    Level
+} from '../../types';
 import { calcTextColor } from '../../util/colorHelpers';
 import ColorBox from '../ColorBox';
 import NavBar from '../NavBar';
@@ -13,7 +19,7 @@ type PaletteProps = {
 };
 
 type PaletteState = {
-    level: number;
+    intensity: ColorIntensity;
     format: ColorFormat;
 };
 
@@ -21,15 +27,15 @@ class Palette extends Component<
     PaletteProps & WithStyles<typeof styles>,
     PaletteState
 > {
-    constructor(props) {
+    constructor(props: PaletteProps & WithStyles<typeof styles>) {
         super(props);
-        this.state = { level: 500, format: 'hex' };
-        this.changeLevel = this.changeLevel.bind(this);
+        this.state = { intensity: 500, format: ColorFormat.HEX };
+        this.changeIntensity = this.changeIntensity.bind(this);
         this.changeFormat = this.changeFormat.bind(this);
     }
 
-    changeLevel(level: number): void {
-        this.setState({ level });
+    changeIntensity(intensity: ColorIntensity): void {
+        this.setState({ intensity });
     }
 
     changeFormat(format: ColorFormat): void {
@@ -37,34 +43,25 @@ class Palette extends Component<
     }
 
     render(): JSX.Element {
-        const {
-            colors,
-            paletteName,
-            emoji,
-            id
-        }: {
-            colors: Gradient;
-            paletteName: string;
-            emoji: string;
-            id: string;
-        } = this.props.palette;
-        const { level, format }: { level: number; format: ColorFormat } = this.state;
-        const colorBoxes: JSX.Element[] = colors[level].map(
-            (color: ComplexColor) => (
-                <ColorBox
-                    textColor={calcTextColor(color[format])}
-                    background={color[format]}
-                    name={color.name}
-                    key={color.id}
-                    moreUrl={`/palette/${id}/${color.id}`}
-                />
-            )
-        );
+        const { levels, paletteName, emoji, id } = this.props.palette;
+        const { intensity, format } = this.state;
+        const level: Level = levels.find(
+            (l: Level): boolean => l.intensity === intensity
+        ) as Level;
+        const colorBoxes: JSX.Element[] = level.colors.map((color: ComplexColor) => (
+            <ColorBox
+                textColor={calcTextColor(color[format])}
+                background={color[format]}
+                name={color.name}
+                key={color.id}
+                moreUrl={`/palette/${id}/${color.id}`}
+            />
+        ));
         return (
             <div className={this.props.classes.Palette}>
                 <NavBar
-                    level={level}
-                    changeLevel={this.changeLevel}
+                    intensity={intensity}
+                    changeIntensity={this.changeIntensity}
                     changeFormat={this.changeFormat}
                 />
                 <div className={this.props.classes.colors}>{colorBoxes}</div>

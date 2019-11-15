@@ -20,7 +20,7 @@ class ColorBox extends Component<
     ColorBoxProps & WithStyles<typeof styles>,
     ColorBoxState
 > {
-    constructor(props) {
+    constructor(props: ColorBoxProps & WithStyles<typeof styles>) {
         super(props);
         this.state = { copied: false };
         this.changeCopyState = this.changeCopyState.bind(this);
@@ -68,7 +68,10 @@ class ColorBox extends Component<
                         </button>
                     </div>
                     {moreUrl && (
-                        <Link to={moreUrl} onClick={e => e.stopPropagation()}>
+                        <Link
+                            to={moreUrl}
+                            onClick={(e): void => e.stopPropagation()}
+                        >
                             <span
                                 style={{ color: textColor }}
                                 className={this.props.classes.seeMore}

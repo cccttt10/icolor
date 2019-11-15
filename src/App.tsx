@@ -12,10 +12,12 @@ import { starterPalettes } from './util/starterPalettes';
 
 class App extends Component {
     findPalette(id: string): StarterPalette {
-        return starterPalettes.find((palette: StarterPalette) => palette.id === id);
+        return starterPalettes.find(
+            (palette: StarterPalette) => palette.id === id
+        ) as StarterPalette;
     }
 
-    render() {
+    render(): JSX.Element {
         const theme = createMuiTheme({
             typography: {
                 fontFamily: ['"Poppins"', '"Helvetica Neue"', 'sans-serif'].join(',')
@@ -27,12 +29,12 @@ class App extends Component {
                     <Route
                         exact
                         path="/palette/new"
-                        render={() => <NewPaletteForm />}
+                        render={(): JSX.Element => <NewPaletteForm />}
                     />
                     <Route
                         exact
                         path="/"
-                        render={routeProps => (
+                        render={(routeProps): JSX.Element => (
                             <PaletteList
                                 palettes={starterPalettes}
                                 {...routeProps}
@@ -42,7 +44,7 @@ class App extends Component {
                     <Route
                         exact
                         path="/palette/:id"
-                        render={routeProps => (
+                        render={(routeProps): JSX.Element => (
                             <Palette
                                 palette={generatePalette(
                                     this.findPalette(routeProps.match.params.id)
@@ -53,7 +55,7 @@ class App extends Component {
                     <Route
                         exact
                         path="/palette/:paletteId/:colorId"
-                        render={routeProps => {
+                        render={(routeProps): JSX.Element => {
                             const palette: ComplexPalette = generatePalette(
                                 this.findPalette(routeProps.match.params.paletteId)
                             );
