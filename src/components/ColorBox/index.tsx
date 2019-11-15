@@ -1,4 +1,4 @@
-import { WithStyles, withStyles } from '@material-ui/styles';
+import { WithStyles, withStyles } from '@material-ui/core';
 import React, { Component, ComponentType } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';

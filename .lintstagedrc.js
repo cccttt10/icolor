@@ -2,7 +2,7 @@ module.exports = {
     './src/**/*.{ts,tsx}': [
         'prettier --config ./.prettierrc.json --write',
         'eslint --fix',
-        'tsc --project ./tsconfig.json',
+        'tsc --noEmit --jsx "react" --esModuleInterop --skipLibCheck',
         'git add'
     ],
     './src/**/*.{js}': [
