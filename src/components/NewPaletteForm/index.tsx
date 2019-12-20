@@ -31,6 +31,7 @@ type NewPaletteFormState = {
     currentColor: string;
     inputColorName: string;
     colors: StarterColor[];
+    paletteName: string;
 };
 
 class NewPaletteForm extends Component<
@@ -43,7 +44,8 @@ class NewPaletteForm extends Component<
             open: true,
             currentColor: 'teal',
             inputColorName: '',
-            colors: [{ hex: '#0000ff', name: 'blue' }]
+            colors: [{ hex: '#0000ff', name: 'blue' }],
+            paletteName: ''
         };
         this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
         this.handleDrawerClose = this.handleDrawerClose.bind(this);
@@ -105,7 +107,7 @@ class NewPaletteForm extends Component<
     }
 
     handleSubmit(): void {
-        const paletteName = 'new test palette';
+        const paletteName = this.state.paletteName;
         const id = paletteName.toLowerCase().replace(/ /g, '-');
         const newPalette: StarterPalette = {
             paletteName,
@@ -146,13 +148,26 @@ class NewPaletteForm extends Component<
                         <Typography variant="h6" color="inherit" noWrap>
                             Persistent drawer
                         </Typography>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSubmit}
-                        >
-                            Save Palette
-                        </Button>
+                        <ValidatorForm onSubmit={this.handleSubmit}>
+                            <TextValidator
+                                name="text validator for specifying name of new palette"
+                                label="Palette Name"
+                                value={this.state.paletteName}
+                                onChange={(e: FormEvent): void =>
+                                    this.setState({
+                                        paletteName: (e.target as HTMLInputElement)
+                                            .value
+                                    })
+                                }
+                            />
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                type="submit"
+                            >
+                                Save Palette
+                            </Button>
+                        </ValidatorForm>
                     </Toolbar>
                 </AppBar>
                 <Drawer
