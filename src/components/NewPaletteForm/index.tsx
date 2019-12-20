@@ -18,7 +18,7 @@ import { ChromePicker, ColorResult } from 'react-color';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { RouteComponentProps } from 'react-router-dom';
 
-import { StarterPalette } from '../../types';
+import { StarterColor, StarterPalette } from '../../types';
 import DraggableColorBox from '../DraggableColorBox/';
 import styles from './styles';
 
@@ -30,12 +30,7 @@ type NewPaletteFormState = {
     open: boolean;
     currentColor: string;
     inputColorName: string;
-    colors: Color[];
-};
-
-type Color = {
-    hex: string;
-    name: string;
+    colors: StarterColor[];
 };
 
 class NewPaletteForm extends Component<
@@ -63,7 +58,7 @@ class NewPaletteForm extends Component<
             'isColorNameUnique',
             (value: string): boolean =>
                 this.state.colors.every(
-                    (color: Color): boolean =>
+                    (color: StarterColor): boolean =>
                         color.name.toLowerCase() !== value.toLowerCase()
                 )
         );
@@ -72,7 +67,8 @@ class NewPaletteForm extends Component<
             /* eslint-disable-next-line */
             (value: string): boolean =>
                 this.state.colors.every(
-                    (color: Color): boolean => color.hex !== this.state.currentColor
+                    (color: StarterColor): boolean =>
+                        color.hex !== this.state.currentColor
                 )
         );
     }
@@ -93,7 +89,7 @@ class NewPaletteForm extends Component<
     addNewColor(): void {
         const hex: string = this.state.currentColor;
         const name: string = this.state.inputColorName;
-        const newColor: Color = {
+        const newColor: StarterColor = {
             hex,
             name: name ? name : hex
         };
