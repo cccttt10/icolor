@@ -4,14 +4,14 @@ import React, { ComponentType } from 'react';
 import styles from './styles';
 
 type DraggableColorBoxProps = {
-    color: string;
+    hex: string;
     name: string;
 };
 
 const DraggableColorBox = (
     props: DraggableColorBoxProps & WithStyles<typeof styles>
 ): JSX.Element => (
-    <div className={props.classes.root} style={{ backgroundColor: props.color }}>
+    <div className={props.classes.root} style={{ backgroundColor: props.hex }}>
         {props.name}
     </div>
 );

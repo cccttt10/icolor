@@ -17,8 +17,13 @@ import React, { Component, ComponentType, FormEvent } from 'react';
 import { ChromePicker, ColorResult } from 'react-color';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 
+import { StarterPalette } from '../../types';
 import DraggableColorBox from '../DraggableColorBox/';
 import styles from './styles';
+
+type NewPaletteFormProps = {
+    savePalette: (newPalette: StarterPalette) => void;
+};
 
 type NewPaletteFormState = {
     open: boolean;
@@ -28,27 +33,28 @@ type NewPaletteFormState = {
 };
 
 type Color = {
-    color: string;
+    hex: string;
     name: string;
 };
 
 class NewPaletteForm extends Component<
-    {} & WithStyles<typeof styles>,
+    NewPaletteFormProps & WithStyles<typeof styles>,
     NewPaletteFormState
 > {
-    constructor(props: {} & WithStyles<typeof styles>) {
+    constructor(props: NewPaletteFormProps & WithStyles<typeof styles>) {
         super(props);
         this.state = {
             open: true,
             currentColor: 'teal',
             inputColorName: '',
-            colors: [{ color: 'blue', name: 'blue' }]
+            colors: [{ hex: '#0000ff', name: 'blue' }]
         };
         this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
         this.handleDrawerClose = this.handleDrawerClose.bind(this);
         this.updateCurrentColor = this.updateCurrentColor.bind(this);
         this.addNewColor = this.addNewColor.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidUpdate(): void {
@@ -65,8 +71,7 @@ class NewPaletteForm extends Component<
             /* eslint-disable-next-line */
             (value: string): boolean =>
                 this.state.colors.every(
-                    (color: Color): boolean =>
-                        color.color !== this.state.currentColor
+                    (color: Color): boolean => color.hex !== this.state.currentColor
                 )
         );
     }
@@ -85,11 +90,11 @@ class NewPaletteForm extends Component<
     }
 
     addNewColor(): void {
-        const color: string = this.state.currentColor;
+        const hex: string = this.state.currentColor;
         const name: string = this.state.inputColorName;
         const newColor: Color = {
-            color,
-            name: name ? name : color
+            hex,
+            name: name ? name : hex
         };
         this.setState({
             colors: [...this.state.colors, newColor],
@@ -102,6 +107,16 @@ class NewPaletteForm extends Component<
         this.setState({ inputColorName });
     }
 
+    handleSubmit(): void {
+        const newPalette: StarterPalette = {
+            paletteName: 'new test palette',
+            colors: this.state.colors,
+            id: 'asdf',
+            emoji: '🇨🇦'
+        };
+        this.props.savePalette(newPalette);
+    }
+
     render(): JSX.Element {
         const { classes } = this.props;
         const { open }: { open: boolean } = this.state;
@@ -111,6 +126,7 @@ class NewPaletteForm extends Component<
                 <CssBaseline />
                 <AppBar
                     position="fixed"
+                    color="default"
                     className={classNames(classes.appBar, {
                         [classes.appBarShift]: open
                     })}
@@ -130,6 +146,13 @@ class NewPaletteForm extends Component<
                         <Typography variant="h6" color="inherit" noWrap>
                             Persistent drawer
                         </Typography>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleSubmit}
+                        >
+                            Save Palette
+                        </Button>
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -191,7 +214,7 @@ class NewPaletteForm extends Component<
                     {this.state.colors.map(color => (
                         <DraggableColorBox
                             key={color.name}
-                            color={color.color}
+                            hex={color.hex}
                             name={color.name}
                         />
                     ))}
@@ -201,4 +224,6 @@ class NewPaletteForm extends Component<
     }
 }
 
-export default withStyles(styles)(NewPaletteForm) as ComponentType<{}>;
+export default withStyles(styles)(NewPaletteForm) as ComponentType<
+    NewPaletteFormProps
+>;

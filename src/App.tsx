@@ -11,10 +11,19 @@ import { generatePalette, generateShades } from './util/colorHelpers';
 import { starterPalettes } from './util/starterPalettes';
 
 class App extends Component {
+    constructor(props = {}) {
+        super(props);
+        this.savePalette = this.savePalette.bind(this);
+    }
+
     findPalette(id: string): StarterPalette {
         return starterPalettes.find(
             (palette: StarterPalette) => palette.id === id
         ) as StarterPalette;
+    }
+
+    savePalette(newPalette: StarterPalette): void {
+        console.log(newPalette);
     }
 
     render(): JSX.Element {
@@ -29,7 +38,9 @@ class App extends Component {
                     <Route
                         exact
                         path="/palette/new"
-                        render={(): JSX.Element => <NewPaletteForm />}
+                        render={(): JSX.Element => (
+                            <NewPaletteForm savePalette={this.savePalette} />
+                        )}
                     />
                     <Route
                         exact
