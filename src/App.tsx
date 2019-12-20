@@ -10,20 +10,27 @@ import { ComplexColor, ComplexPalette, StarterPalette } from './types';
 import { generatePalette, generateShades } from './util/colorHelpers';
 import { starterPalettes } from './util/starterPalettes';
 
-class App extends Component {
+type AppState = {
+    palettes: StarterPalette[];
+};
+
+class App extends Component<{}, AppState> {
     constructor(props = {}) {
         super(props);
+        this.state = { palettes: starterPalettes };
         this.savePalette = this.savePalette.bind(this);
+        this.findPalette = this.findPalette.bind(this);
     }
 
     findPalette(id: string): StarterPalette {
-        return starterPalettes.find(
+        return this.state.palettes.find(
             (palette: StarterPalette) => palette.id === id
         ) as StarterPalette;
     }
 
     savePalette(newPalette: StarterPalette): void {
         console.log(newPalette);
+        this.setState({ palettes: [...this.state.palettes, newPalette] });
     }
 
     render(): JSX.Element {
@@ -38,8 +45,11 @@ class App extends Component {
                     <Route
                         exact
                         path="/palette/new"
-                        render={(): JSX.Element => (
-                            <NewPaletteForm savePalette={this.savePalette} />
+                        render={(routeProps): JSX.Element => (
+                            <NewPaletteForm
+                                savePalette={this.savePalette}
+                                {...routeProps}
+                            />
                         )}
                     />
                     <Route
@@ -47,7 +57,7 @@ class App extends Component {
                         path="/"
                         render={(routeProps): JSX.Element => (
                             <PaletteList
-                                palettes={starterPalettes}
+                                palettes={this.state.palettes}
                                 {...routeProps}
                             />
                         )}

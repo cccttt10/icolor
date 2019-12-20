@@ -16,6 +16,7 @@ import classNames from 'classnames';
 import React, { Component, ComponentType, FormEvent } from 'react';
 import { ChromePicker, ColorResult } from 'react-color';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { StarterPalette } from '../../types';
 import DraggableColorBox from '../DraggableColorBox/';
@@ -23,7 +24,7 @@ import styles from './styles';
 
 type NewPaletteFormProps = {
     savePalette: (newPalette: StarterPalette) => void;
-};
+} & RouteComponentProps;
 
 type NewPaletteFormState = {
     open: boolean;
@@ -108,13 +109,16 @@ class NewPaletteForm extends Component<
     }
 
     handleSubmit(): void {
+        const paletteName = 'new test palette';
+        const id = paletteName.toLowerCase().replace(/ /g, '-');
         const newPalette: StarterPalette = {
-            paletteName: 'new test palette',
+            paletteName,
+            id,
             colors: this.state.colors,
-            id: 'asdf',
             emoji: '🇨🇦'
         };
         this.props.savePalette(newPalette);
+        this.props.history.push('/');
     }
 
     render(): JSX.Element {
