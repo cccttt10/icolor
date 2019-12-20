@@ -48,6 +48,10 @@ class App extends Component<{}, AppState> {
                         render={(routeProps): JSX.Element => (
                             <NewPaletteForm
                                 savePalette={this.savePalette}
+                                existingPaletteNames={this.state.palettes.map(
+                                    (palette: StarterPalette): string =>
+                                        palette.paletteName
+                                )}
                                 {...routeProps}
                             />
                         )}

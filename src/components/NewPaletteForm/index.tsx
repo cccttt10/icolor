@@ -24,11 +24,12 @@ import styles from './styles';
 
 type NewPaletteFormProps = {
     savePalette: (newPalette: StarterPalette) => void;
+    existingPaletteNames: string[];
 } & RouteComponentProps;
 
 type NewPaletteFormState = {
     open: boolean;
-    currentColor: string;
+    currentHex: string;
     inputColorName: string;
     colors: StarterColor[];
     paletteName: string;
@@ -42,14 +43,14 @@ class NewPaletteForm extends Component<
         super(props);
         this.state = {
             open: true,
-            currentColor: 'teal',
+            currentHex: 'teal',
             inputColorName: '',
             colors: [{ hex: '#0000ff', name: 'blue' }],
             paletteName: ''
         };
         this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
         this.handleDrawerClose = this.handleDrawerClose.bind(this);
-        this.updateCurrentColor = this.updateCurrentColor.bind(this);
+        this.updateCurrentHex = this.updateCurrentHex.bind(this);
         this.addNewColor = this.addNewColor.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,20 +58,31 @@ class NewPaletteForm extends Component<
 
     componentDidUpdate(): void {
         ValidatorForm.addValidationRule(
-            'isColorNameUnique',
+            'uniqueColorName',
             (value: string): boolean =>
                 this.state.colors.every(
                     (color: StarterColor): boolean =>
                         color.name.toLowerCase() !== value.toLowerCase()
                 )
         );
+
         ValidatorForm.addValidationRule(
-            'isColorUnique',
+            'uniqueColorHex',
             /* eslint-disable-next-line */
             (value: string): boolean =>
                 this.state.colors.every(
                     (color: StarterColor): boolean =>
-                        color.hex !== this.state.currentColor
+                        color.hex !== this.state.currentHex
+                )
+        );
+
+        ValidatorForm.addValidationRule(
+            'uniquePaletteName',
+            (value: string): boolean =>
+                this.props.existingPaletteNames.every(
+                    (existingPaletteName: string): boolean =>
+                        existingPaletteName.toLowerCase().replace(/ /g, '-') !==
+                        value.toLowerCase().replace(/ /g, '-')
                 )
         );
     }
@@ -83,13 +95,13 @@ class NewPaletteForm extends Component<
         this.setState({ open: false });
     }
 
-    updateCurrentColor(newColor: ColorResult): void {
-        const currentColor: string = newColor.hex;
-        this.setState({ currentColor });
+    updateCurrentHex(newColor: ColorResult): void {
+        const currentHex: string = newColor.hex;
+        this.setState({ currentHex });
     }
 
     addNewColor(): void {
-        const hex: string = this.state.currentColor;
+        const hex: string = this.state.currentHex;
         const name: string = this.state.inputColorName;
         const newColor: StarterColor = {
             hex,
@@ -159,6 +171,11 @@ class NewPaletteForm extends Component<
                                             .value
                                     })
                                 }
+                                validators={['required', 'uniquePaletteName']}
+                                errorMessages={[
+                                    'Enter palette name',
+                                    'Name already used'
+                                ]}
                             />
                             <Button
                                 variant="contained"
@@ -195,15 +212,15 @@ class NewPaletteForm extends Component<
                         </Button>
                     </div>
                     <ChromePicker
-                        color={this.state.currentColor}
-                        onChangeComplete={this.updateCurrentColor}
+                        color={this.state.currentHex}
+                        onChangeComplete={this.updateCurrentHex}
                     />
                     <ValidatorForm onSubmit={this.addNewColor}>
                         <TextValidator
                             name="TextValidator for adding color"
                             value={this.state.inputColorName}
                             onChange={this.handleInputChange}
-                            validators={['isColorNameUnique', 'isColorUnique']}
+                            validators={['uniqueColorName', 'uniqueColorHex']}
                             errorMessages={[
                                 'Color name must be unique',
                                 'Color already used'
@@ -212,7 +229,7 @@ class NewPaletteForm extends Component<
                         <Button
                             variant="contained"
                             color="primary"
-                            style={{ backgroundColor: this.state.currentColor }}
+                            style={{ backgroundColor: this.state.currentHex }}
                             type="submit"
                         >
                             Add Color
